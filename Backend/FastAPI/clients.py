@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
 app = FastAPI()
@@ -40,4 +40,4 @@ def search_client(id: int):
     try:
         return list(clients)[0]
     except:
-        return {"error": "Client not found"}
+        raise HTTPException(status_code=404, detail="No hay un cliente actualmente")
